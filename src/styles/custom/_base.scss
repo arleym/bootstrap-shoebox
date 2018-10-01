@@ -1,0 +1,6 @@
+// base styles
+
+::selection {
+  background-color: var(--primary);
+  color: color-yiq($primary);
+}

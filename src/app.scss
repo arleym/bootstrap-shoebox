@@ -1,3 +1,34 @@
-@import "~bootstrap/dist/css/bootstrap";
+@charset "UTF-8";
+/*
+ * App styles
+ */
 
-body { background-color: #808080; }
+// Settings & Overwrites
+// see node_modules/bootstrap/scss/_variables.scss
+$theme-colors: (
+  "primary":                  #133C53,
+  "secondary":                #2995B6,
+  "success":                  #A2B674,
+  "info":                     #4DAAC4,
+  "warning":                  #ED6C38,
+  "danger":                   #BC312B,
+  "light":                    #fafafa,
+  "dark":                     #12364A
+);
+$enable-caret:              true;
+$enable-rounded:            true;
+$enable-shadows:            false;
+$enable-gradients:          true;
+$enable-transitions:        true;
+$enable-grid-classes:       true;
+$enable-print-styles:       true;
+
+// Import Bootstrap framework - view partial for modules
+@import "styles/bootstrap";
+
+// Extend framework
+@import "styles/extensions/colors";
+
+// Custom styles
+@import "styles/custom/base";
+@import "styles/custom/theme";

@@ -58,16 +58,22 @@ const baseWebpack = {
       {
         test: /\.scss/,
         use: [
-          'style-loader',
+          { loader: 'style-loader', options: { sourceMap: true } },
           MiniCssExtractPlugin.loader,
+          { loader: 'css-loader', options: { sourceMap: true } },
           {
-            loader: 'css-loader',
-            options: { importLoaders: 1 }
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: [
+                require('autoprefixer')({}),
+                require('cssnano')({ preset: 'default' })
+              ],
+              minimize: true,
+              sourceMap: true
+            }
           },
-          'postcss-loader',
-          {
-            loader: 'sass-loader'
-          }
+          { loader: 'sass-loader', options: { sourceMap: true } },
         ]
       },
       {
@@ -98,7 +104,12 @@ const baseWebpack = {
     new MiniCssExtractPlugin({
       filename: 'style.[contenthash].css',
     }),
-    new CopyWebpackPlugin(copyFiles)
+    new CopyWebpackPlugin(copyFiles),
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+      Popper: 'popper.js'
+    })
   ]
 };
 
